@@ -1,0 +1,19 @@
+.bounce {
+  display: inline-block;
+  padding: 20px;
+  animation: bounce 2s infinite; /* 永遠に繰り返し */
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-200px);
+  }
+  60% {
+    transform: translateY(-100px);
+  }
+}
+/* 0%, 20%, 50%, 80%, 100% で位置を元に戻し
+（translateY(0)）、40%のタイミングで上に10px、60%のタイミングで少しだけ戻るように設定しています。 */

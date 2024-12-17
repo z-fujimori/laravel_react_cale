@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\DefaultController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,9 +27,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DefaultController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -38,6 +37,9 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->prefix('test')->name('test.')->group(function () {
     Route::get('/', [TestController::class, 'index'])->name('index');
+    Route::post('/hey', [TestController::class, 'hey']);
+    Route::get('/modal1', [TestController::class, 'modal1'])->name('modal1');
+    Route::get('/modal2', [TestController::class, 'modal2'])->name('modal2');
 });
 
 require __DIR__.'/auth.php';
