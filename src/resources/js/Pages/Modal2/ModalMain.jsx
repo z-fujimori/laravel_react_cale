@@ -40,7 +40,7 @@ const ModalMain = (props) => {
   ];
   datas = Object.values(datas);
 
-  console.log(datas[modalState]);
+  console.log(datas.filter(item => item.id==modalState));
 
   return (
     <Authenticated 
@@ -52,7 +52,7 @@ const ModalMain = (props) => {
       {datas.map((data)=>(
         <ContentCard data={data} setModalState={setModalState} />
       ))}
-      {modalState!==null ? <ModalWindow setShow={setModalState} children={datas[modalState]} /> : <></>}
+      {modalState!==null ? <ModalWindow setShow={setModalState} children={datas.filter(item => item.id==modalState)[0]} /> : <></>}
 
     </Authenticated>
   )
