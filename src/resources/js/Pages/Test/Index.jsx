@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Link } from '@inertiajs/react';
 
 const Index = (props) => {
+  const [a, sets] = useState
   return (
     <Authenticated user={props.auth.user} header={
       <h2 className="font-semibold text-xl text-gray-800 leading-tight">

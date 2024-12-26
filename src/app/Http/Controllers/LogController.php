@@ -7,8 +7,5 @@ use App\Models\Log;
 
 class LogController extends Controller
 {
-    //
-    public function store(Log $log){
-
-    }
+    
 }

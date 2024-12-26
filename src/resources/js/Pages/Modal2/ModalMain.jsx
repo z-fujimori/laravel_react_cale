@@ -6,7 +6,7 @@ import ModalWindow from './ModalWindow';
 const ModalMain = (props) => {
   const [modalState, setModalState] = useState(null)
 
-  let datas = [
+  let origin_datas = [
     {
       id: 1,
       title: "タイトル1",
@@ -38,7 +38,9 @@ const ModalMain = (props) => {
       auther: "作者6"      
     },
   ];
-  datas = Object.values(datas);
+  // datas = Object.values(datas);
+
+  const [datas,setDatas] = useState(origin_datas);
 
   console.log(datas.filter(item => item.id==modalState));
 
@@ -52,7 +54,7 @@ const ModalMain = (props) => {
       {datas.map((data)=>(
         <ContentCard data={data} setModalState={setModalState} />
       ))}
-      {modalState!==null ? <ModalWindow setShow={setModalState} children={datas.filter(item => item.id==modalState)[0]} /> : <></>}
+      {modalState!==null ? <ModalWindow setShow={setModalState} children={datas.filter(item => item.id==modalState)[0]} setDatas={setDatas} /> : <></>}
 
     </Authenticated>
   )
