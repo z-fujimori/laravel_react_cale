@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\PostController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -40,6 +41,10 @@ Route::middleware('auth')->prefix('test')->name('test.')->group(function () {
     Route::post('/hey', [TestController::class, 'hey']);
     Route::get('/modal1', [TestController::class, 'modal1'])->name('modal1');
     Route::get('/modal2', [TestController::class, 'modal2'])->name('modal2');
+
+    Route::get('/post', [PostController::class, 'index'])->name('post');
+    Route::post('/post', [PostController::class, 'store']);
+    Route::get('/test/post/getall', [PostController::class, 'allget']);
 });
 
 require __DIR__.'/auth.php';
