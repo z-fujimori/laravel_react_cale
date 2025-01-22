@@ -44,7 +44,8 @@ Route::middleware('auth')->prefix('test')->name('test.')->group(function () {
 
     Route::get('/post', [PostController::class, 'index'])->name('post');
     Route::post('/post', [PostController::class, 'store']);
-    Route::get('/test/post/getall', [PostController::class, 'allget']);
+    Route::get('/post/getall', [PostController::class, 'allget']);
+    Route::post('/post/like/{post}', [PostController::class, 'post_like']);
 });
 
 require __DIR__.'/auth.php';

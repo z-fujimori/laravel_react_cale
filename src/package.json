@@ -30,6 +30,7 @@
     },
     "dependencies": {
         "bootstrap": "^5.3.3",
+        "lucide-react": "^0.473.0",
         "npm-watch": "^0.13.0",
         "react-helmet": "^6.1.0"
     }

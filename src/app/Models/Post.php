@@ -17,4 +17,7 @@ class Post extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function post_likes() {
+        return $this->hasMany(PostLike::class);
+    }
 }

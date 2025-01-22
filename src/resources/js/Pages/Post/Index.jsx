@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react'
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Link } from '@inertiajs/react';
 import axios from 'axios';
+import { Dot, Heart } from 'lucide-react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Index = (props) => {
 
-    const [posts, setPosts] = useState(["taitle", "titl2"]);
+    const [posts, setPosts] = useState([]);
     const [inputBody, setInputBody] = useState("");
 
     const rodePost = async () => {
-        await axios.get('/test/post/getall').then(res => setPosts(res.data.posts)).catch(err => {console.error(err)});
+        await axios.get('/test/post/getall').then(res => {console.log(res.data);setPosts(res.data.posts)}).catch(err => {console.error(err)});
     }
     useEffect(() => {
         rodePost();
@@ -24,6 +25,15 @@ const Index = (props) => {
             .then(res => {
                 console.log(res.data);
                 rodePost();
+            })
+            .catch(err => {console.error(err)});
+    }
+
+    const likeButton = async (id) => {
+        await axios.post(`/test/post/like/${id}`)
+            .then(async (res) => {
+                console.log(res.data);
+                await rodePost();
             })
             .catch(err => {console.error(err)});
     }
@@ -51,7 +61,25 @@ const Index = (props) => {
 				<div class="card w-75 p-5">
 					{posts.map(((post) =>
 						<div class="card m-1">
-							<div className='card-body'>{post}</div>
+							<div className='card-body d-flex justify-content-between items-center'>
+                                <div class="d-flex justify-center items-center">
+                                    <h5>{post.body}</h5>
+                                    <h5 class="fs-6">({post.user.name})</h5>
+                                </div>
+                                <button onClick={() => likeButton(post.id)}>
+                                    {post.isLike ?
+                                        <div  className="d-flex justify-content-center align-items-center">
+                                            <Heart />
+                                            <h5 class="mb-0 ml-2">{post.likeCount}</h5>
+                                        </div>
+                                        :
+                                        <div className="flex justify-content-center align-items-center">
+                                            <Dot />
+                                            <h5 class="mb-0 ml-2">{post.likeCount}</h5>
+                                        </div>
+                                    }
+                                </button>
+                            </div>
 						</div>
 					))}
 				</div>
